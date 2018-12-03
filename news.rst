@@ -1,7 +1,7 @@
 Release Notes
 ========================================
 
-Version 2.8.0, Not Yet Released
+Version 2.8.0, 2018-10-01
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Add support for using Apple CommonCrypto library for hashing (GH #1667),
@@ -59,6 +59,9 @@ Version 2.8.0, Not Yet Released
 * In ECC private keys, include the public key data for compatibility with
   GnuTLS (GH #1634 #1635)
 
+* Add support for using Linux ``getrandom`` syscall to access the system PRNG.
+  This is disabled by default, use ``--with-os-feature=getrandom`` to enable.
+
 * It is now possible to encrypt private keys using SIV mode.
 
 * The FFI function botan_privkey_load now ignores its rng argument.
@@ -71,10 +74,13 @@ Version 2.8.0, Not Yet Released
 * Handle an error seen when verifying invalid ECDSA signatures using LibreSSL
   on non x86-64 platforms (GH #1627 #1628)
 
+* Fix bugs in PKCS7 and X9.23 CBC padding schemes, which would ignore
+  the first byte in the event the padding took up the entire block. (GH #1690)
+
 * Correct bugs which would cause CFB, OCB, and GCM modes to crash when they
   were used in an unkeyed state. (GH #1639)
 
-* Optimizations for SM4
+* Optimizations for SM4 and Poly1305
 
 * Avoid a cache side channel in the AES key schedule
 
